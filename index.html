@@ -61,11 +61,7 @@
         function validateForm() {
             var my_form = document.forms["loan_application"]
             var name=my_form["name"].value
-            var email=my_form["email"].value
-            var pan=my_form["pan"].value
-            var loan=my_form["loan"].value
-
-            
+            var email=my_form["email"].value            
 
             let interst_rate=8.5
             let tenure=15
@@ -82,7 +78,7 @@
             else {
                 document.getElementById('emi_message').style.visibility = 'hidden'
             }
-            window.location.href = 'Confirm.html?fname=' + fullname[0] + '&email='+email
+            window.location.href = 'Confirm.html?fname=' + name.split(" ")[0] + '&email='+email
         }
         
     </script>
