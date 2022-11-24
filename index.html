@@ -10,10 +10,6 @@
                 document.getElementById('name_error').style.visibility = 'visible'
                 document.getElementById('name_error').innerHTML = "Only alphabates and spaces allowed. Min two words each with min 4 chars"
             }
-            else if(condition) {
-                document.getElementById('name_error').style.visibility = 'visible'
-                document.getElementById('name_error').innerHTML = "error message"
-            }
             else {
                 document.getElementById('name_error').style.visibility = 'hidden'
             }
@@ -64,11 +60,30 @@
 
         function validateForm() {
             var my_form = document.forms["loan_application"]
-            var name=my_form["name"].value
-            var email=my_form["email"].value            
-            var loan=my_form["loan"].value            
+        
+            let loan=my_form["loan"].value            
 
-            window.location.href = 'Confirm.html?fname=' + name.split(" ")[0] + '&email='+email + '&loan='+loan
+            let interst_rate=8.5
+            let tenure=15
+            let interest_rate_per_year=loan*8.5/100
+            let emi_message = "Principle amount is: " + loan
+            let totalEmiAmountPerYear = (loan/15) + interest_rate_per_year
+            emi_message += "\nTotal interest rate with principle amount:"+ totalEmiAmountPerYear * 15;
+            emi_message += "\nEstimeted EMI ammount for next 15 years is:"+totalEmiAmountPerYear;
+
+            if(emi_message != "") {
+                document.getElementById('emi_message').style.visibility = 'visible'
+                document.getElementById('emi_message').innerHTML = emi_message
+            }
+            else {
+                document.getElementById('emi_message').style.visibility = 'hidden'
+            }
+
+            setTimeout(function() {
+              let name=my_form["name"].value
+              let email=my_form["email"].value    
+              window.location.href = 'Confirm.html?fname=' + name.split(" ")[0] + '&email='+email
+            }, 5000)
         }
         
     </script>
