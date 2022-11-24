@@ -102,7 +102,7 @@
                 <tr>
                   <td><label>Full Name:</label></td>
                   <td>
-                    <input type="text" placeholder="Full Name" name="name" id="name" onchange="checkNameValidation()"/><br /><br />
+                    <input type="text" placeholder="Full Name" name="name" id="name" onkeyup="checkNameValidation()"/><br /><br />
                   </td>
                   <td><label id="name_error"></label></td>
                 </tr>
@@ -115,7 +115,7 @@
                       placeholder="Email Address"
                       name="email"
                       id="email"
-                      onchange="checkEmailValidation()"
+                      onkeyup="checkEmailValidation()"
                     /><br /><br />
                   </td>
                   <td><label id="email_error"></label></td>
@@ -124,7 +124,7 @@
                 <tr>
                   <td><label>PAN NO:</label></td>
                   <td>
-                    <input type="text" placeholder="Enter PAN No" name="pan" id="pan" onchange="checkPanValidation()" /><br /><br />
+                    <input type="text" placeholder="Enter PAN No" name="pan" id="pan" onkeyup="checkPanValidation()" /><br /><br />
                   </td>
                   <td><label id="pan_error"></label></td>
                 </tr>
@@ -132,7 +132,7 @@
                 <tr>
                   <td><label>Loan Amount:</label></td>
                   <td>
-                    <input type="text" placeholder="Loan Amount" name="loan" id="loan" onchange="checkLoanValidation()"/><br /><br />
+                    <input type="text" placeholder="Loan Amount" name="loan" id="loan" onkeyup="checkLoanValidation()"/><br /><br />
                   </td>
                   <td><label id="loan_error"></label></td>
                 </tr>
