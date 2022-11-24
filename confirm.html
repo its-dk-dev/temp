@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+        let otp = Math.floor(Math.random() * 10000)
+        console.log("OTP", otp)
+        let urlParams = new URLSearchParams(window.location.search)
+        let message = "Dear " + urlParams.get("fname") + "\n"
+        message += "Thank you for your inquiry. A 4 digit verification number has been sent to your email: " +  urlParams.get("email") + ", Please enter in the following box and submit for confirmation"
+        
+        alert(message)
+
+        let attempt = 1;
+         function sendEmail() {
+            let formData = document.forms["confirm_form"]
+            var otp_error = ""
+
+            if(formData['otp'].value == "") {
+              otp_error = "Please enter OTP"
+            }
+            else {
+              if(attempt === 3) {
+                otp_error = "Validation failed!!!"
+                window.location.href = 'http://pixel6.co/notfound'
+              }
+              else {
+                if(formData['otp'].value == otp) {
+                  otp_error = "Validation successfull"
+                  window.location.href = 'http://pixel6.co/'
+                }
+                else {
+                  otp_error = "Please reenter" 
+                  formData['otp'].value = ""   
+                }   
+              }
+              attempt++
+            }
+
+            if(otp_error != "") {
+                document.getElementById('otp_error').style.visibility = 'visible'
+                document.getElementById('otp_error').innerHTML = otp_error
+            }
+            else {
+                document.getElementById('otp_error').style.visibility = 'hidden'
+            }
+          }  
+    </script>
+  </head>
+  <body>
+    <center>
+      <form name="confirm_form">
+        <div id="otp_error"> </div><br>
+        <label>Please enter OTP</label><input type="text" placeholder="Please enter OTP" name="otp"/><br /><br />
+        <input type="button" value="Submit" onclick="sendEmail()"/>
+      </form>      
+    </center>
+  </body>
+</html>
