@@ -3,6 +3,11 @@
   <head>
     <title>Document</title>
     <script>
+      var isNameInvalid = true
+      var isEmailInvalid = true
+      var isPanInvalid = true
+      var isLoanInvalid = true
+      
       function checkNameValidation () {
            var name = document.getElementById('name').value;
            var fullname = name.split(' ')
@@ -12,6 +17,7 @@
             }
             else {
                 document.getElementById('name_error').style.visibility = 'hidden'
+                isNameInvalid = false
             }
       }
 
@@ -23,6 +29,7 @@
             }
             else {
                 document.getElementById('email_error').style.visibility = 'hidden'
+                isEmailInvalid = false
             }
       }
 
@@ -34,6 +41,7 @@
             }
             else {
                 document.getElementById('pan_error').style.visibility = 'hidden'
+                isPanInvalid = false
             }
       }
 
@@ -53,23 +61,19 @@
             }
             else {
                 document.getElementById('loan_error').style.visibility = 'hidden'
+                isLoanInvalid = false
+                calculateEMI(loan)
             }
       }
 
-      
-
-        function validateForm() {
-            var my_form = document.forms["loan_application"]
-        
-            let loan=my_form["loan"].value            
-
+      function calculateEMI(loan) {
             let interst_rate=8.5
             let tenure=15
             let interest_rate_per_year=loan*8.5/100
             let emi_message = "Principle amount is: " + loan
             let totalEmiAmountPerYear = (loan/15) + interest_rate_per_year
-            emi_message += "\nTotal interest rate with principle amount:"+ totalEmiAmountPerYear * 15;
-            emi_message += "\nEstimeted EMI ammount for next 15 years is:"+totalEmiAmountPerYear;
+            emi_message += "<br>Total interest rate with principle amount:"+ totalEmiAmountPerYear * 15;
+            emi_message += "<br>Estimeted EMI ammount for next 15 years is:"+totalEmiAmountPerYear;
 
             if(emi_message != "") {
                 document.getElementById('emi_message').style.visibility = 'visible'
@@ -78,12 +82,15 @@
             else {
                 document.getElementById('emi_message').style.visibility = 'hidden'
             }
+      }
+      
 
-            setTimeout(function() {
-              let name=my_form["name"].value
-              let email=my_form["email"].value    
+        function validateForm() {
+            if(!isNameInvalid && !isEmailInvalid && !isPanInvalid && !isLoanInvalid) {
+              var name = document.getElementById('name').value;
+              var email = document.getElementById('email').value; 
               window.location.href = 'Confirm.html?fname=' + name.split(" ")[0] + '&email='+email
-            }, 5000)
+            }
         }
         
     </script>
@@ -103,7 +110,7 @@
                 <tr>
                   <td><label>Full Name:</label></td>
                   <td>
-                    <input type="text" placeholder="Full Name" name="name" id="name" onkeyup="checkNameValidation()"/><br /><br />
+                    <input type="text" placeholder="Full Name" name="name" id="name" onblur="checkNameValidation()"/><br /><br />
                   </td>
                   <td><label id="name_error"></label></td>
                 </tr>
@@ -116,7 +123,7 @@
                       placeholder="Email Address"
                       name="email"
                       id="email"
-                      onkeyup="checkEmailValidation()"
+                      onblur="checkEmailValidation()"
                     /><br /><br />
                   </td>
                   <td><label id="email_error"></label></td>
@@ -125,7 +132,7 @@
                 <tr>
                   <td><label>PAN NO:</label></td>
                   <td>
-                    <input type="text" placeholder="Enter PAN No" name="pan" id="pan" onkeyup="checkPanValidation()" /><br /><br />
+                    <input type="text" placeholder="Enter PAN No" name="pan" id="pan" onblur="checkPanValidation()" /><br /><br />
                   </td>
                   <td><label id="pan_error"></label></td>
                 </tr>
@@ -133,7 +140,7 @@
                 <tr>
                   <td><label>Loan Amount:</label></td>
                   <td>
-                    <input type="text" placeholder="Loan Amount" name="loan" id="loan" onkeyup="checkLoanValidation()"/><br /><br />
+                    <input type="text" placeholder="Loan Amount" name="loan" id="loan" onblur="checkLoanValidation()"/><br /><br />
                   </td>
                   <td><label id="loan_error"></label></td>
                 </tr>
