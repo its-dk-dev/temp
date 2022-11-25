@@ -35,16 +35,16 @@
             }
             else {
               if(attempt === 3) {
-                otp_error = "Validation failed!!!"
+                otp_error = "Verification failed!!!"
                 window.location.href = 'http://pixel6.co/notfound'
               }
               else {
                 if(formData['otp'].value == otp) {
-                  otp_error = "Validation successfull"
+                  otp_error = "Verification successfull!!"
                   window.location.href = 'http://pixel6.co/'
                 }
                 else {
-                  otp_error = "Please reenter" 
+                  otp_error = "Attempt " + attempt + " Please reenter OTP" 
                   formData['otp'].value = ""   
                 }   
               }
