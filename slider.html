@@ -79,45 +79,50 @@
       let currentIndex = 0;
       let currentSlide = 1;
       
-
-      setInterval(() => {
-            if (currentSlide < slides.length - 2) {
-                currentIndex = (currentIndex + 1 + slides.length) % slides.length;
-                showSlide(++currentSlide);
-                updateSlider();
-                if(currentSlide === slides.length - 2) {
-                    currentIndex = -1;
-                    currentSlide = 0;
-                }
-            }
-        }, 1000); 
+    //   setInterval(() => {
+    //         if (currentSlide < slides.length - 2) {
+    //             currentIndex = (currentIndex + 1 + slides.length) % slides.length;
+    //             showSlide(++currentSlide);
+    //             updateSlider();
+    //             if(currentSlide === slides.length - 2) {
+    //                 currentIndex = -1;
+    //                 currentSlide = 0;
+    //             }
+    //         }
+    //     }, 1000); 
 
       prevButton.addEventListener('click', () => {
-        if (currentSlide > 1) {
-          showSlide(--currentSlide);
-          // currentIndex--;
+        if (currentSlide > 1) { 
+          showSlide(--currentSlide); 
           currentIndex = (currentIndex - 1 + slides.length) % slides.length;
           updateSlider();
         }
+        else {
+            currentIndex = slides.length - 3
+            currentSlide = slides.length - 2;
+            showSlide(currentSlide); 
+            updateSlider();
+          }
       });
 
       nextButton.addEventListener('click', () => {
         if (currentSlide < slides.length - 2) {
-          showSlide(++currentSlide);
-          // currentIndex++;
+          showSlide(++currentSlide); 
           currentIndex = (currentIndex + 1 + slides.length) % slides.length;
           updateSlider();
-          if(currentSlide === slides.length - 2) {
-            currentIndex = -1;
-            currentSlide = 0;
-          }
+        }
+        else {
+            currentIndex = 0;
+            currentSlide = 1;
+            showSlide(currentSlide); 
+            updateSlider();
         }
       });
 
       function updateSlider() {
+        console.table({currentIndex, currentSlide});
         const translateX = -currentIndex * 33.33;
         slider.style.transform = `translateX(${translateX}%)`;
-        
       }
 
       function showSlide(index) {
